@@ -7,7 +7,7 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 oauth2Client.setCredentials({
-  refresh_token: ""
+  refresh_token: "process.env.REFRESH_TOKENS"
 });
 
 const blogger = google.blogger({
