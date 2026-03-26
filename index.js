@@ -1,13 +1,13 @@
 const { google } = require("googleapis");
 
 const oauth2Client = new google.auth.OAuth2(
-  "YOUR_CLIENT_ID",
-  "YOUR_CLIENT_SECRET",
-  "YOUR_REDIRECT_URI"
+  "process.env.CLIENT_ID",
+  "process.env.CLIENT_SECRET",
+  "https://developers.google.com/oauthplayground"
 );
 
 oauth2Client.setCredentials({
-  refresh_token: "YOUR_REFRESH_TOKEN"
+  refresh_token: ""
 });
 
 const blogger = google.blogger({
