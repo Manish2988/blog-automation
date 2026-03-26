@@ -9,7 +9,7 @@ const oauth2Client = new google.auth.OAuth2(
 );
 console.log("REFRESH_TOKEN:", process.env.REFRESH_TOKEN ? "Present" : "Missing");
 oauth2Client.setCredentials({
-  refresh_token: process.env.REFRESH_TOKENS
+  refresh_token: process.env.REFRESH_TOKEN
 });
 
 const blogger = google.blogger({
