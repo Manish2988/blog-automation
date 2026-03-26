@@ -1,5 +1,7 @@
 const { google } = require("googleapis");
-
+if (!process.env.CLIENT_ID) {
+  throw new Error("Missing CLIENT_ID");
+}
 const oauth2Client = new google.auth.OAuth2(
   "process.env.CLIENT_ID",
   "process.env.CLIENT_SECRET",
