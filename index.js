@@ -70,7 +70,7 @@ function generateContent(products) {
 
 // 🚀 Create Draft Post
 async function createDraft() {
-  const blogId = "YOUR_BLOG_ID";
+  const blogId = "process.env.BLOG_ID";
 
   const res = await blogger.posts.insert({
     blogId: blogId,
