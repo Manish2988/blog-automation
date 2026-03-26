@@ -3,13 +3,13 @@ if (!process.env.CLIENT_ID) {
   throw new Error("Missing CLIENT_ID");
 }
 const oauth2Client = new google.auth.OAuth2(
-  "process.env.CLIENT_ID",
-  "process.env.CLIENT_SECRET",
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
   "https://developers.google.com/oauthplayground"
 );
 
 oauth2Client.setCredentials({
-  refresh_token: "process.env.REFRESH_TOKENS"
+  refresh_token: process.env.REFRESH_TOKENS
 });
 
 const blogger = google.blogger({
