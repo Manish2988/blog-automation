@@ -17,6 +17,27 @@ const blogger = google.blogger({
   auth: oauth2Client
 });
 
+const keywords = [
+  "Best table lamp for studying at night India",
+  "Best LED study lamp under ₹1000 India",
+  "Best chair for long study hours India budget",
+  "Best extension board for study table India",
+  "Best phone stand for online classes India",
+  "Best earbuds for online classes under ₹1500 India",
+  "Best study setup under ₹2000 India",
+  "Amazon finds for study table India"
+];
+
+function getRandomKeyword() {
+  let index = new Date().getDate() % keywords.length;
+  const keyword = keywords[index];
+  return keyword;
+}
+
+function generateTitle(keyword) {
+  return `${keyword} (2026 Guide)`;
+}
+
 // 🔥 MOCK PRODUCTS (replace later with Amazon API)
 const products = [
   {
@@ -36,105 +57,89 @@ const products = [
 ];
 
 // 🧠 Generate Blog HTML
-function generateContent(products) {
+function generateContent(keyword, products) {
   let html = `
-    <h1>Best Gadgets Under ₹1000 in India (2026)</h1>
+    <h1>${keyword} (2026 Guide)</h1>
 
-<p>
-Looking for the <strong>best gadgets under ₹1000</strong>? We’ve handpicked the most useful, high-rated and value-for-money products available right now.
-</p>
+    <p>
+    Looking for the <strong>${keyword.toLowerCase()}</strong>? 
+    We’ve selected the best options based on price, ratings, and usability in India.
+    </p>
 
-<p><em>Disclaimer: This post contains affiliate links. Prices may vary.</em></p>
+    <p><em>Disclaimer: This post contains affiliate links. Prices may vary.</em></p>
 
-<hr/>
-
-<h2>🔥 Top Picks (Quick List)</h2>
-<ul>
-  <li>✔ Wireless Earbuds – Best for music lovers</li>
-  <li>✔ Portable Blender – Best for kitchen use</li>
-  <li>✔ LED Desk Lamp – Best for study/work</li>
-</ul>
-
-<hr/>
-
-<h2>🛍️ Detailed Reviews</h2>
+    <h2>🔥 Top Picks</h2>
+    <ul>
   `;
+
+  products.forEach(p => {
+    html += `<li>${p.title}</li>`;
+  });
+
+  html += `</ul><hr/><h2>🛍️ Detailed Reviews</h2>`;
 
   products.forEach((p, i) => {
     html += `
-      <h2>${i + 1}. ${p.title}</h2>
-      <h3>1. PRODUCT_NAME</h3>
+      <h3>${i + 1}. ${p.title}</h3>
+      <img src="${p.image}" width="250"/>
 
-<img src="IMAGE_URL" alt="PRODUCT_NAME" width="250"/>
+      <p><strong>Price:</strong> ₹${p.price}</p>
+      <p><strong>Rating:</strong> ⭐${p.rating}</p>
 
-<p><strong>Price:</strong> ₹PRICE</p>
-<p><strong>Rating:</strong> ⭐RATING</p>
+      <p>
+      This is a great choice for users looking for ${keyword.toLowerCase()}.
+      It offers good value and reliable performance.
+      </p>
 
-<p>
-This PRODUCT_NAME is one of the best options in this price range. It is ideal for users who want VALUE_USE_CASE.
-</p>
+      <h4>✅ Pros</h4>
+      <ul>
+        <li>Good ratings</li>
+        <li>Affordable</li>
+      </ul>
 
-<h4>✅ Pros</h4>
-<ul>
-  <li>Good build quality</li>
-  <li>High customer ratings</li>
-  <li>Affordable price</li>
-</ul>
+      <h4>❌ Cons</h4>
+      <ul>
+        <li>Limited stock</li>
+      </ul>
 
-<h4>❌ Cons</h4>
-<ul>
-  <li>Limited stock sometimes</li>
-  <li>Basic features</li>
-</ul>
+      <a href="${p.link}" target="_blank">
+      👉 Check Latest Price on Amazon
+      </a>
 
-<p>
-<a href="AFFILIATE_LINK" target="_blank">
-👉 Check Latest Price on Amazon
-</a>
-</p>
-
-<hr/>
+      <hr/>
     `;
   });
 
   html += `
-    <h2>🤔 Buying Guide</h2>
-
-<p>
-When choosing gadgets under ₹1000, consider:
-</p>
-
-<ul>
-  <li>✔ Build quality</li>
-  <li>✔ Customer ratings</li>
-  <li>✔ Warranty & brand trust</li>
-</ul>
-
-<h2>🏁 Final Verdict</h2>
-
-<p>
-If you want the best overall, go for <strong>TOP_PRODUCT</strong>. 
-For budget buyers, <strong>SECOND_PRODUCT</strong> is a great choice.
-</p>
+    <h2>🏁 Final Verdict</h2>
+    <p>
+    If you're looking for the best option, go for <strong>${products[0].title}</strong>.
+    It provides the best balance of price and performance.
+    </p>
   `;
 
   return html;
 }
 
+
 // 🚀 Create Draft Post
 async function createDraft() {
-  const blogId = process.env.BLOG_ID;
+  const keyword = getRandomKeyword();
+  const title = generateTitle(keyword);
+
+  const content = generateContent(keyword, products);
 
   const res = await blogger.posts.insert({
-  blogId: blogId,
-  isDraft: true,   // ✅ THIS is the key
-  requestBody: {
-    title: "Best gadgets under Rs. 1000",
-    content: generateContent(products)
-  }
-});
+    blogId: process.env.BLOG_ID,
+    isDraft: true,
+    requestBody: {
+      title: title,
+      content: content,
+      labels: ["study setup", "amazon finds"]
+    }
+  });
 
-  console.log("Draft Created:", res.data.url);
+  console.log("Draft created for:", keyword);
 }
 
 createDraft();
