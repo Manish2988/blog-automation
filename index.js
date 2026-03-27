@@ -86,6 +86,38 @@ const products = [
   }
 ];
 
+function generateComparisonTable(products) {
+  let table = `
+    <h2>📊 Quick Comparison</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Action</th>
+      </tr>
+  `;
+
+  products.forEach((p) => {
+    table += `
+      <tr>
+        <td>${p.title}</td>
+        <td>₹${p.price}</td>
+        <td>⭐${p.rating}</td>
+        <td>
+          <a href="${p.link}" target="_blank">
+          Check Price
+          </a>
+        </td>
+      </tr>
+    `;
+  });
+
+  table += `</table><br/>`;
+
+  return table;
+}
+
 // 🧠 Generate Blog HTML
 function generateContent(keyword, products) {
   let html = `
@@ -96,7 +128,7 @@ function generateContent(keyword, products) {
     <h2>🔥 Top Picks</h2>
     <ul>
   `;
-
+html += generateComparisonTable(products);
   products.forEach(p => {
     html += `<li>${p.title}</li>`;
   });
