@@ -261,10 +261,16 @@ async function createDraft() {
   return new Promise(res => setTimeout(res, ms));
 }
 
+function getKeyword(indexOffset = 0) {
+  const baseIndex = new Date().getDate();
+  return keywords[(baseIndex + indexOffset) % keywords.length];
+}
+
 async function runMultiplePosts() {
   for (let i = 0; i < 2; i++) {
-    await createDraft();
-    await delay(5000); // 5 sec gap
+    const keyword = getKeyword(i);
+    await createDraft(keyword);
+    await delay(5000));
   }
 }
   
