@@ -58,9 +58,20 @@ function generateHumanDescription(p, keyword) {
   `;
 }
 
-function getRandomKeyword() {
-  let index = new Date().getDate() % keywords.length;
-  const keyword = keywords[index];
+
+const fs = require("fs");
+
+function getNextKeyword() {
+  let index = 0;
+
+  if (fs.existsSync("keywordIndex.txt")) {
+    index = parseInt(fs.readFileSync("keywordIndex.txt"));
+  }
+
+  const keyword = keywords[index % keywords.length];
+
+  fs.writeFileSync("keywordIndex.txt", index + 1);
+
   return keyword;
 }
 
@@ -68,23 +79,38 @@ function generateTitle(keyword) {
   return `${keyword} (2026 Guide)`;
 }
 
-// 🔥 MOCK PRODUCTS (replace later with Amazon API)
-const products = [
-  {
-    title: "Wireless Earbuds",
-    price: "999",
-    rating: "4.3",
-    image: "https://via.placeholder.com/150",
-    link: "https://amazon.in/dp/example?tag=yourtag-21"
-  },
-  {
-    title: "Portable Blender",
-    price: "799",
-    rating: "4.2",
-    image: "https://via.placeholder.com/150",
-    link: "https://amazon.in/dp/example?tag=yourtag-21"
-  }
-];
+const productPool = {
+  "lamp": [
+    {
+      title: "Wipro LED Study Lamp",
+      price: "899",
+      rating: "4.3",
+      image: "https://m.media-amazon.com/images/I/61lamp.jpg",
+      link: "https://amazon.in/dp/XXXXX?tag=yourtag-21"
+    }
+  ],
+
+  "earbuds": [
+    {
+      title: "boAt Airdopes 141",
+      price: "1299",
+      rating: "4.2",
+      image: "https://m.media-amazon.com/images/I/61earbuds.jpg",
+      link: "https://amazon.in/dp/YYYYY?tag=yourtag-21"
+    }
+  ]
+};
+
+function getCategory(keyword) {
+  if (keyword.includes("lamp")) return "lamp";
+  if (keyword.includes("earbuds")) return "earbuds";
+  return "lamp";
+}
+
+function getProductsForKeyword(keyword) {
+  const category = getCategory(keyword);
+  return productPool[category] || [];
+}
 
 function generateComparisonTable(products) {
   let table = `
@@ -172,24 +198,32 @@ html += generateComparisonTable(products);
   html += `</ul><hr/><h2>🛍️ Detailed Reviews</h2>`;
 
   products.forEach((p, i) => {
-    html += `
-      <h3>${i + 1}. ${p.title}</h3>
-      <img src="${p.image}" width="250"/>
+  products.forEach((p, i) => {
+  const badge = i === 0 
+    ? `<p><strong>🏆 Best Overall Choice</strong></p>` 
+    : "";
 
-      <p><strong>Price:</strong> ₹${p.price}</p>
-      <p><strong>Rating:</strong> ⭐${p.rating}</p>
+  html += `
+    <h3>${i + 1}. ${p.title}</h3>
 
-      ${generateHumanDescription(p, keyword)}
+    ${badge}
 
-      ${generateProsCons(keyword)}
+    <img src="${p.image}" width="250"/>
 
-      <a href="${p.link}" target="_blank">
+    <p><strong>Price:</strong> ₹${p.price}</p>
+    <p><strong>Rating:</strong> ⭐${p.rating}</p>
+
+    ${generateHumanDescription(p, keyword)}
+
+    ${generateProsCons(keyword)}
+
+    <a href="${p.link}" target="_blank">
       👉 Check Latest Price (Limited Deal)
-      </a>
+    </a>
 
-      <hr/>
-    `;
-  });
+    <hr/>
+  `;
+});
 
   html += `
     <h2>🏁 Final Verdict</h2>
@@ -205,9 +239,10 @@ html += generateComparisonTable(products);
 
 // 🚀 Create Draft Post
 async function createDraft() {
-  const keyword = getRandomKeyword();
-  const title = generateTitle(keyword);
+  const keyword = keywords[new Date().getDate() % keywords.length];
 
+  const title = generateTitle(keyword);
+  const products = getProductsForKeyword(keyword);
   const content = generateContent(keyword, products);
 
   const res = await blogger.posts.insert({
@@ -222,5 +257,16 @@ async function createDraft() {
 
   console.log("Draft created for:", keyword);
 }
+ 
+  function delay(ms) {
+  return new Promise(res => setTimeout(res, ms));
+}
 
-createDraft();
+async function runMultiplePosts() {
+  for (let i = 0; i < 2; i++) {
+    await createDraft();
+    await delay(5000); // 5 sec gap
+  }
+}
+  
+runMultiplePosts();
