@@ -118,6 +118,42 @@ function generateComparisonTable(products) {
   return table;
 }
 
+function generateProsCons(keyword) {
+  const prosPool = [
+    "Good value for money",
+    "Highly rated by users",
+    "Suitable for daily use",
+    "Compact and easy to use",
+    "Energy efficient"
+  ];
+
+  const consPool = [
+    "Limited advanced features",
+    "Stock may run out quickly",
+    "Not ideal for heavy usage",
+    "Basic design"
+  ];
+
+  function pickRandom(arr) {
+    return arr.sort(() => 0.5 - Math.random()).slice(0, 2);
+  }
+
+  const pros = pickRandom(prosPool);
+  const cons = pickRandom(consPool);
+
+  return `
+    <h4>✅ Pros</h4>
+    <ul>
+      ${pros.map(p => `<li>${p}</li>`).join("")}
+    </ul>
+
+    <h4>❌ Cons</h4>
+    <ul>
+      ${cons.map(c => `<li>${c}</li>`).join("")}
+    </ul>
+  `;
+}
+
 // 🧠 Generate Blog HTML
 function generateContent(keyword, products) {
   let html = `
@@ -145,19 +181,10 @@ html += generateComparisonTable(products);
 
       ${generateHumanDescription(p, keyword)}
 
-      <h4>✅ Pros</h4>
-      <ul>
-        <li>Good ratings</li>
-        <li>Affordable</li>
-      </ul>
-
-      <h4>❌ Cons</h4>
-      <ul>
-        <li>Limited stock</li>
-      </ul>
+      ${generateProsCons(keyword)}
 
       <a href="${p.link}" target="_blank">
-      👉 Check Latest Price on Amazon
+      👉 Check Latest Price (Limited Deal)
       </a>
 
       <hr/>
