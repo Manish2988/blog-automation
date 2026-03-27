@@ -237,7 +237,7 @@ html += generateComparisonTable(products);
 
 
 // 🚀 Create Draft Post
-async function createDraft() {
+async function createDraft(keyword) { {
   const keyword = keywords[new Date().getDate() % keywords.length];
 
   const title = generateTitle(keyword);
