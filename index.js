@@ -129,7 +129,7 @@ async function createDraft() {
   blogId: blogId,
   isDraft: true,   // ✅ THIS is the key
   requestBody: {
-    title: "Your Title",
+    title: "Best gadgets under Rs. 1000",
     content: generateContent(products)
   }
 });
