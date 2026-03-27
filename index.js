@@ -126,13 +126,13 @@ async function createDraft() {
   const blogId = process.env.BLOG_ID;
 
   const res = await blogger.posts.insert({
-    blogId: blogId,
-    requestBody: {
-      title: "Best Gadgets Under ₹1000 (2026)",
-      content: generateContent(products),
-      status: "DRAFT"
-    }
-  });
+  blogId: blogId,
+  isDraft: true,   // ✅ THIS is the key
+  requestBody: {
+    title: "Your Title",
+    content: generateContent(products)
+  }
+});
 
   console.log("Draft Created:", res.data.url);
 }
