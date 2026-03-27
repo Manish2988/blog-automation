@@ -28,6 +28,36 @@ const keywords = [
   "Amazon finds for study table India"
 ];
 
+const introLines = [
+  "I’ve shortlisted these based on ratings and real usability.",
+  "After comparing multiple options, these stand out in this budget.",
+  "These are practical picks I would personally recommend."
+];
+
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateHumanDescription(p, keyword) {
+  const intros = [
+    `If you're searching for ${keyword.toLowerCase()}, this is a solid option.`,
+    `One of the most practical choices for ${keyword.toLowerCase()} right now.`,
+    `For daily use, this product stands out in this category.`
+  ];
+
+  const useCases = [
+    "ideal for long study sessions",
+    "great for small desks or compact spaces",
+    "useful for students and work-from-home users",
+    "works well for everyday usage"
+  ];
+
+  return `
+    <p>${getRandom(intros)}</p>
+    <p>It is ${getRandom(useCases)} and offers a good balance of price and performance.</p>
+  `;
+}
+
 function getRandomKeyword() {
   let index = new Date().getDate() % keywords.length;
   const keyword = keywords[index];
@@ -60,12 +90,7 @@ const products = [
 function generateContent(keyword, products) {
   let html = `
     <h1>${keyword} (2026 Guide)</h1>
-
-    <p>
-    Looking for the <strong>${keyword.toLowerCase()}</strong>? 
-    We’ve selected the best options based on price, ratings, and usability in India.
-    </p>
-
+    <p>${getRandom(introLines)}</p>
     <p><em>Disclaimer: This post contains affiliate links. Prices may vary.</em></p>
 
     <h2>🔥 Top Picks</h2>
@@ -86,10 +111,7 @@ function generateContent(keyword, products) {
       <p><strong>Price:</strong> ₹${p.price}</p>
       <p><strong>Rating:</strong> ⭐${p.rating}</p>
 
-      <p>
-      This is a great choice for users looking for ${keyword.toLowerCase()}.
-      It offers good value and reliable performance.
-      </p>
+      ${generateHumanDescription(p, keyword)}
 
       <h4>✅ Pros</h4>
       <ul>
