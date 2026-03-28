@@ -270,7 +270,7 @@ async function runMultiplePosts() {
   for (let i = 0; i < 2; i++) {
     const keyword = getKeyword(i);
     await createDraft(keyword);
-    await delay(5000));
+    await delay(5000);
   }
 }
   
