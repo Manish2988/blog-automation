@@ -205,7 +205,10 @@ function generateComparisonTable(products) {
     table += `
       <tr>
         <td>
-          <img src="${p.image}" width="60" style="vertical-align: middle; margin-right: 8px;" />
+          <a href="${link}" target="_blank">
+  <img src="${p.image}" width="220" 
+       style="border-radius:8px; display:block; margin:10px 0;" />
+</a>
           ${p.title}
         </td>
         <td>₹${p.price}</td>
