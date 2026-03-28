@@ -16,6 +16,19 @@ const blogger = google.blogger({
   version: "v3",
   auth: oauth2Client
 });
+const AMAZON_TAG = "manish2988-21";
+
+function generateAffiliateLink(url) {
+  if (!url) return "#";
+
+  // If URL already has parameters
+  if (url.includes("?")) {
+    return `${url}&tag=${AMAZON_TAG}`;
+  }
+
+  // If no parameters
+  return `${url}?tag=${AMAZON_TAG}`;
+}
 
 const keywords = [
   "Best table lamp for studying at night India",
@@ -86,7 +99,7 @@ const productPool = {
       price: "899",
       rating: "4.3",
       image: "https://m.media-amazon.com/images/I/61lamp.jpg",
-      link: "https://amazon.in/dp/XXXXX?tag=yourtag-21"
+      url: "https://www.amazon.in/dp/XXXX""
     }
   ],
 
@@ -96,7 +109,7 @@ const productPool = {
       price: "1299",
       rating: "4.2",
       image: "https://m.media-amazon.com/images/I/61earbuds.jpg",
-      link: "https://amazon.in/dp/YYYYY?tag=yourtag-21"
+      url: "https://www.amazon.in/dp/XXXX"
     }
   ]
 };
@@ -112,10 +125,13 @@ function getProductsForKeyword(keyword) {
   return productPool[category] || [];
 }
 
+
+
 function generateComparisonTable(products) {
   let table = `
     <h2>📊 Quick Comparison</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
+    <div style="overflow-x:auto;">
+    <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; text-align: left;">
       <tr>
         <th>Product</th>
         <th>Price</th>
@@ -125,24 +141,34 @@ function generateComparisonTable(products) {
   `;
 
   products.forEach((p) => {
+    const link = generateAffiliateLink(p.url); // ✅ IMPORTANT
+
     table += `
       <tr>
-        <td>${p.title}</td>
+        <td>
+          <img src="${p.image}" width="60" style="vertical-align: middle; margin-right: 8px;" />
+          ${p.title}
+        </td>
         <td>₹${p.price}</td>
         <td>⭐${p.rating}</td>
         <td>
-          <a href="${p.link}" target="_blank">
-          Check Price
+          <a href="${link}" target="_blank" style="color: blue; font-weight: bold;">
+            👉 View on Amazon
           </a>
         </td>
       </tr>
     `;
   });
 
-  table += `</table><br/>`;
+  table += `
+    </table>
+    </div>
+    <br/>
+  `;
 
   return table;
 }
+
 
 function generateProsCons(keyword) {
   const prosPool = [
@@ -180,8 +206,24 @@ function generateProsCons(keyword) {
   `;
 }
 
+
+
+function sortProducts(products) {
+  return products.sort((a, b) => {
+    // First compare rating (higher is better)
+    if (parseFloat(b.rating) !== parseFloat(a.rating)) {
+      return parseFloat(b.rating) - parseFloat(a.rating);
+    }
+
+    // If rating same → lower price wins
+    return parseFloat(a.price) - parseFloat(b.price);
+  });
+}
+
+
 // 🧠 Generate Blog HTML
 function generateContent(keyword, products) {
+  
   let html = `
     <h1>${keyword} (2026 Guide)</h1>
     <p>${getRandom(introLines)}</p>
@@ -201,7 +243,7 @@ html += generateComparisonTable(products);
   const badge = i === 0 
     ? `<p><strong>🏆 Best Overall Choice</strong></p>` 
     : "";
-
+const link = generateAffiliateLink(p.url);
   html += `
     <h3>${i + 1}. ${p.title}</h3>
 
@@ -216,8 +258,8 @@ html += generateComparisonTable(products);
 
     ${generateProsCons(keyword)}
 
-    <a href="${p.link}" target="_blank">
-      👉 Check Latest Price (Limited Deal)
+    <a href="${link}" target="_blank">
+    👉 Check Latest Price (Limited Deal)
     </a>
 
     <hr/>
@@ -241,7 +283,10 @@ async function createDraft(keyword) {
   const title = generateTitle(keyword);
   const products = getProductsForKeyword(keyword);
   const content = generateContent(keyword, products);
+let products = getProductsForKeyword(keyword);
 
+// ✅ Sort products
+products = sortProducts(products);
   const res = await blogger.posts.insert({
     blogId: process.env.BLOG_ID,
     isDraft: true,
