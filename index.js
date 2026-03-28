@@ -92,30 +92,12 @@ function generateTitle(keyword) {
   return `${keyword} (2026 Guide)`;
 }
 
-const productPool = {
-  "lamp": [
-    {
-      title: "Wipro LED Study Lamp",
-      price: "899",
-      rating: "4.3",
-      image: "https://m.media-amazon.com/images/I/61lamp.jpg",
-      url: "https://www.amazon.in/dp/XXXX"
-    }
-  ],
 
-  "earbuds": [
-    {
-      title: "boAt Airdopes 141",
-      price: "1299",
-      rating: "4.2",
-      image: "https://m.media-amazon.com/images/I/61earbuds.jpg",
-      url: "https://www.amazon.in/dp/XXXX"
-    }
-  ]
-};
 
 function getCategory(keyword) {
   if (keyword.includes("lamp")) return "lamp";
+  if (keyword.includes("stand")) return "stand";
+  if (keyword.includes("extension")) return "extension";
   if (keyword.includes("earbuds")) return "earbuds";
   return "lamp";
 }
@@ -125,6 +107,83 @@ function getProductsForKeyword(keyword) {
   return productPool[category] || [];
 }
 
+const productPool = {
+
+  lamp: [
+    {
+      title: "Wipro Garnet LED Desk Light",
+      price: "1329",
+      rating: "4.3",
+      image: "https://m.media-amazon.com/images/I/61Z4Qw9k3LL._SX679_.jpg",
+      url: "https://amzn.in/d/00MR8QZV"
+    },
+    {
+      title: "Philips Air LED Desk Light",
+      price: "649",
+      rating: "4.4",
+      image: "https://m.media-amazon.com/images/I/71eQwWz7ZKL._SX679_.jpg",
+      url: "https://amzn.in/d/08iT8LN1"
+    },
+    {
+      title: "Havells Glare LED Table Lamp",
+      price: "1099",
+      rating: "4.2",
+      image: "https://m.media-amazon.com/images/I/61lamp123._SX679_.jpg",
+      url: "https://amzn.in/d/0aTR5Fwg"
+    }
+  ],
+
+  stand: [
+    {
+      title: "STRIFF Adjustable Mobile Stand",
+      price: "199",
+      rating: "4.3",
+      image: "https://m.media-amazon.com/images/I/61a1XwS3ZkL._SX679_.jpg",
+      url: "https://amzn.in/d/0aNBw2y1"
+    },
+    {
+      title: "Portronics MODESK Mobile Holder",
+      price: "249",
+      rating: "4.2",
+      image: "https://m.media-amazon.com/images/I/61stand123._SX679_.jpg",
+      url: "https://www.amazon.in/dp/B08ABCDE12"
+    }
+  ],
+
+  extension: [
+    {
+      title: "Portronics Power Plate 10 Extension Board",
+      price: "399",
+      rating: "4.5",
+      image: "https://m.media-amazon.com/images/I/61power123._SX679_.jpg",
+      url: "https://www.amazon.in/dp/B08345XYZ"
+    },
+    {
+      title: "Havells 6A 4 Socket Extension Board",
+      price: "349",
+      rating: "4.4",
+      image: "https://m.media-amazon.com/images/I/61ext123._SX679_.jpg",
+      url: "https://www.amazon.in/dp/B07ABCDE34"
+    }
+  ],
+
+  earbuds: [
+    {
+      title: "boAt Airdopes 141 Bluetooth Earbuds",
+      price: "1299",
+      rating: "4.2",
+      image: "https://m.media-amazon.com/images/I/61KNJav3S9L._SX679_.jpg",
+      url: "https://www.amazon.in/dp/B09XYZ567"
+    },
+    {
+      title: "Boult Audio Z40 True Wireless Earbuds",
+      price: "999",
+      rating: "4.1",
+      image: "https://m.media-amazon.com/images/I/61ear123._SX679_.jpg",
+      url: "https://www.amazon.in/dp/B08LMNOPQ"
+    }
+  ]
+};
 
 
 function generateComparisonTable(products) {
@@ -308,12 +367,39 @@ function getKeyword(indexOffset = 0) {
   return keywords[(baseIndex + indexOffset) % keywords.length];
 }
 
-async function runMultiplePosts() {
+/*async function runMultiplePosts() {
   for (let i = 0; i < 2; i++) {
     const keyword = getKeyword(i);
     await createDraft(keyword);
     await delay(5000);
   }
-}
-  
-runMultiplePosts();
+}*/
+
+  async function runThreePosts() {
+  for (let i = 0; i < 3; i++) {
+    const keyword = getKeyword(i);
+
+    let products = getProductsForKeyword(keyword);
+
+    products = sortProducts(products);
+
+    const content = generateContent(keyword, products);
+
+    await blogger.posts.insert({
+      blogId: process.env.BLOG_ID,
+      isDraft: true,
+      requestBody: {
+        title: generateTitle(keyword),
+        content: content,
+        labels: ["study setup", "amazon finds"]
+      }
+    });
+
+    console.log("Created post:", keyword);
+
+    await new Promise(r => setTimeout(r, 5000));
+  }
+  }
+
+runThreePosts();
+//runMultiplePosts();
