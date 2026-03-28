@@ -99,7 +99,7 @@ const productPool = {
       price: "899",
       rating: "4.3",
       image: "https://m.media-amazon.com/images/I/61lamp.jpg",
-      url: "https://www.amazon.in/dp/XXXX""
+      url: "https://www.amazon.in/dp/XXXX"
     }
   ],
 
