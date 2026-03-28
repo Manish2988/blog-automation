@@ -283,7 +283,6 @@ async function createDraft(keyword) {
   const title = generateTitle(keyword);
   const products = getProductsForKeyword(keyword);
   const content = generateContent(keyword, products);
-let products = getProductsForKeyword(keyword);
 
 // ✅ Sort products
 products = sortProducts(products);
