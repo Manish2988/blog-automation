@@ -281,7 +281,7 @@ const link = generateAffiliateLink(p.url);
 // 🚀 Create Draft Post
 async function createDraft(keyword) { 
   const title = generateTitle(keyword);
-  const products = getProductsForKeyword(keyword);
+  let products = getProductsForKeyword(keyword);
   const content = generateContent(keyword, products);
 
 // ✅ Sort products
