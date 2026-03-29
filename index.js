@@ -76,6 +76,65 @@ function getNextKeyword() {
   return keyword;
 }
 
+function generateProsCons() {
+  const prosPool = [
+    "Good value for money",
+    "Highly rated by users",
+    "Suitable for daily use",
+    "Compact and easy to use",
+    "Energy efficient",
+    "Reliable brand"
+  ];
+
+  const consPool = [
+    "Limited advanced features",
+    "Not ideal for heavy usage",
+    "Basic design",
+    "Stock may run out quickly"
+  ];
+
+  function pickRandom(arr) {
+    return arr.sort(() => 0.5 - Math.random()).slice(0, 2);
+  }
+
+  const pros = pickRandom(prosPool);
+  const cons = pickRandom(consPool);
+
+  return `
+    <h4>✅ Pros</h4>
+    <ul>
+      ${pros.map(p => `<li>${p}</li>`).join("")}
+    </ul>
+
+    <h4>❌ Cons</h4>
+    <ul>
+      ${cons.map(c => `<li>${c}</li>`).join("")}
+    </ul>
+  `;
+}
+function generateIntro(keyword) {
+  return `
+  <p>
+  Looking for <strong>${keyword.toLowerCase()}</strong>? You're in the right place.
+  With so many options available on Amazon, choosing the right one can be confusing.
+  </p>
+
+  <p>
+  To make it easier, we’ve shortlisted some of the <strong>top-rated and best-selling products</strong> based on real user reviews, performance, and value for money.
+  </p>
+
+  <p>
+  Whether you're a student, working professional, or setting up your study space, these picks are practical, reliable, and budget-friendly.
+  </p>
+
+  <p>
+  👉 Let’s quickly compare the best options available right now.
+  </p>
+
+  <p><em>Disclaimer: This post contains affiliate links. Prices may change.</em></p>
+  `;
+}
+
 // 🎯 Better titles (CTR optimized)
 function generateTitle(keyword) {
   const templates = [
@@ -138,27 +197,43 @@ function generateComparisonTable(products) {
 
 // 📝 Content generator
 function generateContent(keyword, products) {
-  let html = `
-  <h1>${keyword} (2026 Guide)</h1>
-  <p><em>Affiliate links included. Prices may vary.</em></p>
-  `;
-
+  let html += generateIntro(keyword);
+  
   html += generateComparisonTable(products);
-
+  html += `
+  <h2>Best ${keyword} – Top Picks (2026)</h2>
+  `;
   products.forEach((p, i) => {
-    const link = generateAffiliateLink(p.url);
+  const link = generateAffiliateLink(p.url);
 
-    html += `
+  const badge =
+    i === 0
+      ? `<p><strong>🏆 Best Overall Choice</strong></p>`
+      : i === 1
+      ? `<p><strong>💰 Best Budget Pick</strong></p>`
+      : `<p><strong>✨ Good Alternative</strong></p>`;
+
+  html += `
     <h3>${i + 1}. ${p.title}</h3>
+
+    ${badge}
+
     <a href="${link}" target="_blank">
       <img src="${p.image}" width="250"/>
     </a>
+
     <p><strong>Price:</strong> ₹${p.price}</p>
     <p><strong>Rating:</strong> ⭐${p.rating}</p>
-    <a href="${link}" target="_blank">👉 Check on Amazon</a>
+
+    ${generateProsCons()}
+
+    <a href="${link}" target="_blank">
+      👉 Check Latest Price (Limited Deal)
+    </a>
+
     <hr/>
-    `;
-  });
+  `;
+});
 
   return html;
 }
