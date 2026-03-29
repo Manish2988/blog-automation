@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "googleapis": "^126.0.1",
-  "axios": "...",
-  "cheerio": "..."
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0"
     }
 }
