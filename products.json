@@ -124,7 +124,7 @@
     "rating": "4.2",
     "image": "https://m.media-amazon.com/images/I/51ZAfq9WU2L._SL1500_.jpg",
     "url": "https://www.amazon.in/Havells-Four-Way-Extension-Board-White/dp/B00J1YQWC6"
-  }
+  },
   {
     "title": "Portronics Power Plate 6 with 4 USB Port + 5 Power Sockets Extension Board",
     "price": "769",
@@ -138,7 +138,7 @@
     "rating": "4.3",
     "image": "https://m.media-amazon.com/images/I/81y9uufgrML._SL1500_.jpg",
     "url": "https://www.amazon.in/Ambrane-Extension-International-Appliances-SmartStrip/dp/B0DWSQQB5S"
-  }
+  },
   {
     "title": "ADDMAX Extension Board with USB | 6 Power Sockets, 2 USB Ports + 1 Type-C Port ",
     "price": "642",
@@ -146,6 +146,21 @@
     "image": "https://m.media-amazon.com/images/I/71MTJeL-J6L._SL1500_.jpg",
     "url": "https://www.amazon.in/ADDMAX-Extension-Cord-Port-Multi-Protection/dp/B083M1D7HW"
   }
-    
+  ],
+  "chair": [
+  {
+    "title": "Green Soul Seoul Mid Back Chair",
+    "price": "3590",
+    "rating": "4.1",
+    "image": "https://m.media-amazon.com/images/I/71wqxn2Ox+L._SL1500_.jpg",
+    "url": "https://www.amazon.in/Green-Soul-Ergonomic-Comfortable-Rocking-tilt/dp/B092QRJKJD"
+  },
+{
+    "title": "beAAtho® Verona Mesh High Back Ergonomic Home Office Chair",
+    "price": "4447",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/71-SFCnskgL._SL1500_.jpg",
+    "url": "https://www.amazon.in/beAAtho%C2%AE-Executive-Warranty-Ergonomic-Revolving/dp/B0D8QCJP5J"
+  }
   ]
 }
