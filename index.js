@@ -75,15 +75,19 @@ function generateHumanDescription(p, keyword) {
 const fs = require("fs");
 
 function getNextKeyword() {
+function getNextKeyword() {
+  const file = "keywordIndex.txt";
+
   let index = 0;
 
-  if (fs.existsSync("keywordIndex.txt")) {
-    index = parseInt(fs.readFileSync("keywordIndex.txt"));
+  if (fs.existsSync(file)) {
+    index = parseInt(fs.readFileSync(file, "utf-8")) || 0;
   }
 
   const keyword = keywords[index % keywords.length];
 
-  fs.writeFileSync("keywordIndex.txt", index + 1);
+  // ✅ FIX: convert number to string
+  fs.writeFileSync(file, (index + 1).toString());
 
   return keyword;
 }
