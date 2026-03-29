@@ -110,9 +110,11 @@ function getCategory(keyword) {
   return "lamp";
 }
 
+const productData = JSON.parse(fs.readFileSync("products.json", "utf-8"));
+
 function getProductsForKeyword(keyword) {
   const category = getCategory(keyword);
-  return productPool[category] || [];
+  return productData[category] || [];
 }
 
 const productPool = {
