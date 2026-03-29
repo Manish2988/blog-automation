@@ -75,15 +75,19 @@ function generateHumanDescription(p, keyword) {
 const fs = require("fs");
 
 function getNextKeyword() {
+function getNextKeyword() {
+  const file = "keywordIndex.txt";
+
   let index = 0;
 
-  if (fs.existsSync("keywordIndex.txt")) {
-    index = parseInt(fs.readFileSync("keywordIndex.txt"));
+  if (fs.existsSync(file)) {
+    index = parseInt(fs.readFileSync(file, "utf-8")) || 0;
   }
 
   const keyword = keywords[index % keywords.length];
 
-  fs.writeFileSync("keywordIndex.txt", index + 1);
+  // ✅ FIX: convert number to string
+  fs.writeFileSync(file, (index + 1).toString());
 
   return keyword;
 }
@@ -110,9 +114,14 @@ function getCategory(keyword) {
   return "lamp";
 }
 
+const productData = JSON.parse(fs.readFileSync("products.json", "utf-8"));
+
 function getProductsForKeyword(keyword) {
   const category = getCategory(keyword);
-  return productPool[category] || [];
+  const products = productData[category] || [];
+
+  // Shuffle + pick top 3
+  return products.sort(() => 0.5 - Math.random()).slice(0, 3);
 }
 
 const productPool = {
