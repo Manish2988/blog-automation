@@ -1,30 +1,151 @@
 {
-  "lamp": [{
-  "title": "",
-  "price": "",
-  "rating": "",
-  "image": "",
-  "url": ""
-  }],
-  "stand": [{
-  "title": "",
-  "price": "",
-  "rating": "",
-  "image": "",
-  "url": ""
-}],
-  "extension": [{
-  "title": "",
-  "price": "",
-  "rating": "",
-  "image": "",
-  "url": ""
-  }],
-  "earbuds": [{
-  "title": "",
-  "price": "",
-  "rating": "",
-  "image": "",
-  "url": ""
-  }]
+"lamp": [
+  {
+    "title": "Wipro Garnet LED Desk Light",
+    "price": "702",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/617P1iGF4vL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Rechargable-Charging-Portable-Lighting-Adjustable/dp/B0CX5C5L4N"
+  },
+  {
+    "title": "Philips Air LED Desk Light EyeComfort Technology",
+    "price": "649",
+    "rating": "4.4",
+    "image": "https://m.media-amazon.com/images/I/71mI4aUUQYL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Philips-61013-Air-5-Watt-Desklight/dp/B016VYAWA6"
+  },
+  {
+    "title": "Havells Glare LED Table Lamp Adjustable Brightness",
+    "price": "1099",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/71mBL3TGbAL._SL1500_.jpg",
+    "url": "https://www.amazon.in/dp/B08KQBYZ3L"
+  },
+  {
+    "title": "Dyazo Overhead Long Arm LED Desk Lamp",
+    "price": "1099",
+    "rating": "4.7",
+    "image": "https://m.media-amazon.com/images/I/61Dq-MPpDkL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Dyazo-Overhead-360%C2%B0Adjustable-Brightness-Function/dp/B0GM8111XD"
+  },
+  {
+    "title": "WEIRD WOLF Rechargeable LED Study Table Lamp for Study & Office",
+    "price": "499",
+    "rating": "4.4",
+    "image": "https://m.media-amazon.com/images/I/61pdsGv9BRL._SL1500_.jpg",
+    "url": "https://www.amazon.in/WEIRD-WOLF-Rechargeable-Brightness-Adjustable/dp/B0FR9KHQZM"
+  }
+],
+  "stand": [
+  {
+    "title": "STRIFF Adjustable Mobile Stand Foldable",
+    "price": "199",
+    "rating": "4.3",
+    "image": "https://m.media-amazon.com/images/I/51FnbY-cX6L._SL1500_.jpg",
+    "url": "https://www.amazon.in/STRIFF-Rotating-Foldable-Adjustable-Smartphones/dp/B0FGQTK31D/"
+  },
+  {
+    "title": "Portronics MODESK Universal Mobile Holder",
+    "price": "249",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/617dVwDF7XL._SL1200_.jpg",
+    "url": "https://www.amazon.in/Portronics-Multifunctional-Universal-Adjustment-Compatible/dp/B0CMZWBCKB"
+  },
+  {
+    "title": "Amazon Basics Multi-Angle Portable Stand",
+    "price": "299",
+    "rating": "4.4",
+    "image": "https://m.media-amazon.com/images/I/61vXo9wH0pL._SX679_.jpg",
+    "url": "https://www.amazon.in/dp/B07V5JZ9V3"
+  },
+    {
+      "title": "Ambrane 360 Rotation Foldable Design Mobile Stand",
+    "price": "249",
+    "rating": "4.5",
+    "image": "https://m.media-amazon.com/images/I/71JKAX3hVRL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Ambrane-Rotation-adjustments-Compatible-Smartphones/dp/B0CQLXQKGR"
+    },
+    {
+      "title": "Ambrane 360 Rotation Foldable Design Mobile Stand",
+    "price": "249",
+    "rating": "4.0",
+    "image": "https://m.media-amazon.com/images/I/61TjMb09hKL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Rotatable-Metallic-Adjustable-Foldable-Smartphones/dp/B0DTZ21J13"
+    }
+  ],
+  "earbuds": [
+  {
+    "title": "boAt Airdopes 141 Bluetooth Earbuds",
+    "price": "1299",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/61KNJav3S9L._SX679_.jpg",
+    "url": "https://www.amazon.in/boAt-Airdopes-141-Streaming-Bluetooth/dp/B0F8BVSK21"
+  },
+  {
+    "title": "Boult Audio Z40 True Wireless Earbuds",
+    "price": "999",
+    "rating": "4.1",
+    "image": "https://m.media-amazon.com/images/I/71fS4NkxVQL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Boult-Audio-Wireless-Playtime-Bluetooth/dp/B0BQMY24QV"
+  },
+  {
+    "title": "Noise Buds VS102 Plus Wireless Earbuds",
+    "price": "1199",
+    "rating": "3.4",
+    "image": "https://m.media-amazon.com/images/I/61Sok9EsgjL._SL1500_.jpg",
+    "url": "https://www.amazon.in/Noise-Wireless-Bluetooth-Playtime-Instacharge/dp/B0DS2XNXZB"
+  },
+  {
+    "title": "realme Buds T200 Lite Bluetooth Earbuds",
+    "price": "1328",
+    "rating": "4.1",
+    "image": "https://m.media-amazon.com/images/I/61MOG3nzwQL._SL1500_.jpg",
+    "url": "https://www.amazon.in/realme-Bluetooth-Earbuds-Playback-Charging/dp/B0DZCRYG7R"
+  },
+  {
+    "title": "truke New Launch Mega 12 True Wireless in Ear Earbuds",
+    "price": "1299",
+    "rating": "4.7",
+    "image": "https://m.media-amazon.com/images/I/71mfptbAY-L._SL1500_.jpg",
+    "url": "https://www.amazon.in/truke-Wireless-Earbuds-Textured-Playtime/dp/B0GK1MTWC1"
+  }
+  ],
+  "extension": [
+  {
+    "title": "Portronics Power Plate 10 Extension Board",
+    "price": "399",
+    "rating": "4.3",
+    "image": "https://m.media-amazon.com/images/I/51ZvXlsv2gL._SL1200_.jpg",
+    "url": "https://www.amazon.in/Portronics-Converter-Sockets-Protection-Intelligent/dp/B0B2WQFHB2"
+  },
+  {
+    "title": "Havells 4 Socket Extension Board with Switch",
+    "price": "463",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/51ZAfq9WU2L._SL1500_.jpg",
+    "url": "https://www.amazon.in/Havells-Four-Way-Extension-Board-White/dp/B00J1YQWC6"
+  }
+  {
+    "title": "Portronics Power Plate 6 with 4 USB Port + 5 Power Sockets Extension Board",
+    "price": "769",
+    "rating": "4.4",
+    "image": "https://m.media-amazon.com/images/I/51ZAfq9WU2L._SL1500_.jpg",
+    "url": "https://www.amazon.in/Portronics-Sockets-Extension-Converter-Length/dp/B09RH4GCDY"
+  },
+ {
+    "title": "Ambrane Extension Board, 4 Type C, 2 USB, 5 International Power Sockets",
+    "price": "1299",
+    "rating": "4.3",
+    "image": "https://m.media-amazon.com/images/I/81y9uufgrML._SL1500_.jpg",
+    "url": "https://www.amazon.in/Ambrane-Extension-International-Appliances-SmartStrip/dp/B0DWSQQB5S"
+  }
+  {
+    "title": "ADDMAX Extension Board with USB | 6 Power Sockets, 2 USB Ports + 1 Type-C Port ",
+    "price": "642",
+    "rating": "4.2",
+    "image": "https://m.media-amazon.com/images/I/71MTJeL-J6L._SL1500_.jpg",
+    "url": "https://www.amazon.in/ADDMAX-Extension-Cord-Port-Multi-Protection/dp/B083M1D7HW"
+  }
+    
+  ]
 }
