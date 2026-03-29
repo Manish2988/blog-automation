@@ -89,7 +89,15 @@ function getNextKeyword() {
 }
 
 function generateTitle(keyword) {
-  return `${keyword} (2026 Guide)`;
+  const templates = [
+    `Best ${keyword} (2026) – Top Picks Under Budget`,
+    `${keyword} – Top 5 Picks You Shouldn’t Miss (2026)`,
+    `Top ${keyword} in India (2026) – Budget to Premium`,
+    `${keyword}: Best Options for Students & Daily Use`,
+    `Best ${keyword} in India (2026) – Honest Review`
+  ];
+
+  return getRandom(templates);
 }
 
 
@@ -377,7 +385,7 @@ function getKeyword(indexOffset = 0) {
 
 async function runPosts(count = 1) {
   for (let i = 0; i < count; i++) {
-    const keyword = getKeyword(i);
+    const keyword = getNextKeyword();
 
     await createDraft(keyword);
 
@@ -387,31 +395,8 @@ async function runPosts(count = 1) {
   }
 }
 
-  async function runThreePosts() {
-  for (let i = 0; i < 3; i++) {
-    const keyword = getKeyword(i);
+  
 
-    let products = getProductsForKeyword(keyword);
-
-    products = sortProducts(products);
-
-    const content = generateContent(keyword, products);
-
-    await blogger.posts.insert({
-      blogId: process.env.BLOG_ID,
-      isDraft: true,
-      requestBody: {
-        title: generateTitle(keyword),
-        content: content,
-        labels: ["study setup", "amazon finds"]
-      }
-    });
-
-    console.log("Created post:", keyword);
-
-   await new Promise(r => setTimeout(r, 5000));
-  }
-  }
 
 const POST_COUNT = process.env.POST_COUNT || 1;
 
