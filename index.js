@@ -42,8 +42,23 @@ const keywords = [
   "Best phone stand for online classes India",
   "Best earbuds for online classes under ₹1500 India",
   "Best study setup under ₹2000 India",
-  "Amazon finds for study table India"
+  "Amazon finds for study table India",
+  "Best study lamp under ₹1000 India",
+  "Best mobile stand for study table India",
+  "Best earbuds for online classes under ₹1500"
 ];
+
+function getCategory(keyword) {
+  keyword = keyword.toLowerCase();
+
+  if (keyword.includes("lamp")) return "lamp";
+  if (keyword.includes("stand")) return "stand";
+  if (keyword.includes("extension")) return "extension";
+  if (keyword.includes("earbuds")) return "earbuds";
+  if (keyword.includes("chair")) return "chair"; // ✅ ADD
+
+  return "lamp";
+}
 
 // 🔁 Keyword rotation (persistent)
 function getNextKeyword() {
