@@ -197,7 +197,7 @@ function generateComparisonTable(products) {
 
 // 📝 Content generator
 function generateContent(keyword, products) {
-  let html += generateIntro(keyword);
+  let html = generateIntro(keyword);
   
   html += generateComparisonTable(products);
   html += `
