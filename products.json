@@ -1,6 +1,30 @@
 {
-  "lamp": [],
-  "stand": [],
-  "extension": [],
-  "earbuds": []
+  "lamp": [{
+  "title": "",
+  "price": "",
+  "rating": "",
+  "image": "",
+  "url": ""
+  }],
+  "stand": [{
+  "title": "",
+  "price": "",
+  "rating": "",
+  "image": "",
+  "url": ""
+}],
+  "extension": [{
+  "title": "",
+  "price": "",
+  "rating": "",
+  "image": "",
+  "url": ""
+  }],
+  "earbuds": [{
+  "title": "",
+  "price": "",
+  "rating": "",
+  "image": "",
+  "url": ""
+  }]
 }
