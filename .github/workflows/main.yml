@@ -1,4 +1,6 @@
 name: Update Products
+permissions:
+  contents: write
 on:
   workflow_dispatch:
   schedule:
@@ -9,18 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run updater
-        run: node updateProducts.js
-
-      - name: Commit updated products
-        run: |
-          git config --global user.name "Manish2988"
-          git config --global user.email "manishshinde8829@gmail.com"
-          git add products.json
-          git commit -m "update products" || echo "No changes"
-          git push
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: true
+    - name: Install dependencies
+      run: npm install
+    - name: Run updater
+      run: node updateProducts.js
+    - name: Commit & Push changes
+      run: |
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    
+            git add products.json
+            git commit -m "update products" || echo "No changes"
+    
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
