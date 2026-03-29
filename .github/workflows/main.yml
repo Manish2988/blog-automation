@@ -19,7 +19,7 @@ jobs:
 
       - name: Commit updated products
         run: |
-          git config --global user.name "Manish 2988"
+          git config --global user.name "Manish2988"
           git config --global user.email "manishshinde8829@gmail.com"
           git add products.json
           git commit -m "update products" || echo "No changes"
