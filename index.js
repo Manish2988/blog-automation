@@ -114,7 +114,10 @@ const productData = JSON.parse(fs.readFileSync("products.json", "utf-8"));
 
 function getProductsForKeyword(keyword) {
   const category = getCategory(keyword);
-  return productData[category] || [];
+  const products = productData[category] || [];
+
+  // Shuffle + pick top 3
+  return products.sort(() => 0.5 - Math.random()).slice(0, 3);
 }
 
 const productPool = {
