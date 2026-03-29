@@ -73,8 +73,6 @@ function generateHumanDescription(p, keyword) {
 
 
 const fs = require("fs");
-
-function getNextKeyword() {
 function getNextKeyword() {
   const file = "keywordIndex.txt";
 
