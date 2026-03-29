@@ -4,7 +4,10 @@ on:
   schedule:
     - cron: '0 6,14 * * *'  # daily at 6 AM
   workflow_dispatch:     # allows manual run
-
+  
+env:
+  POST_COUNT: 2
+  
 jobs:
   run-script:
     runs-on: ubuntu-latest
