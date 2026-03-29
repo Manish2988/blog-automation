@@ -311,7 +311,9 @@ const link = generateAffiliateLink(p.url);
 
     ${badge}
 
-    <img src="${p.image}" width="250"/>
+    <a href="${link}" target="_blank">
+      <img src="${p.image}" width="250" style="border-radius:8px; margin:10px 0;" />
+    </a>
 
     <p><strong>Price:</strong> ₹${p.price}</p>
     <p><strong>Rating:</strong> ⭐${p.rating}</p>
@@ -343,12 +345,15 @@ const link = generateAffiliateLink(p.url);
 // 🚀 Create Draft Post
 async function createDraft(keyword) { 
   const title = generateTitle(keyword);
+
   let products = getProductsForKeyword(keyword);
+
+  // ✅ Sort BEFORE content
+  products = sortProducts(products);
+
   const content = generateContent(keyword, products);
 
-// ✅ Sort products
-products = sortProducts(products);
-  const res = await blogger.posts.insert({
+  await blogger.posts.insert({
     blogId: process.env.BLOG_ID,
     isDraft: true,
     requestBody: {
@@ -370,13 +375,17 @@ function getKeyword(indexOffset = 0) {
   return keywords[(baseIndex + indexOffset) % keywords.length];
 }
 
-/*async function runMultiplePosts() {
-  for (let i = 0; i < 2; i++) {
+async function runPosts(count = 1) {
+  for (let i = 0; i < count; i++) {
     const keyword = getKeyword(i);
+
     await createDraft(keyword);
-    await delay(5000);
+
+    console.log("Created post:", keyword);
+
+    await delay(5000); // prevent API limits
   }
-}*/
+}
 
   async function runThreePosts() {
   for (let i = 0; i < 3; i++) {
@@ -400,9 +409,10 @@ function getKeyword(indexOffset = 0) {
 
     console.log("Created post:", keyword);
 
-    await new Promise(r => setTimeout(r, 5000));
+   await new Promise(r => setTimeout(r, 5000));
   }
   }
 
-runThreePosts();
-//runMultiplePosts();
+const POST_COUNT = process.env.POST_COUNT || 1;
+
+runPosts(parseInt(POST_COUNT));
